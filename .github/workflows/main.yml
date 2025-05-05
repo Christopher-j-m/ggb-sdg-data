@@ -28,11 +28,12 @@ jobs:
       run: |
         python scripts/convert_sdg_data.py masterlist.csv output/sdg_data.json
 
-    # Step 4: Commit and push the new JSON file
-    - name: Commit and push JSON
+    # Step 4: Commit and push the new JSON file to the "output" branch
+    - name: Commit and push JSON to "output" branch
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git checkout -B output
         git add output/sdg_data.json
         git commit -m "Update sdg_data.json"
-        git push
+        git push origin output
