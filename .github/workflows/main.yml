@@ -26,7 +26,7 @@ jobs:
     # Step 3: Run the Convert-Script
     - name: Run Python script
       run: |
-        python src/convert_sdg_data.py masterlist.csv sdg_data.json
+        python ./src/convert_sdg_data.py masterlist.csv sdg_data.json
 
     # Step 4: Commit and push the new JSON file
     - name: Commit and push JSON
