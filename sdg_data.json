@@ -2294,5 +2294,30 @@
         "Address": "Moosdorfstraße 7-9, 12435 Berlin",
         "Latitude": "52,48802",
         "Longitude": "13,4605"
+    },
+    {
+        "Name": "Quartiermeister – die erste gemeinwohlbilanzierte Biermarke Deutschlands",
+        "Website": "",
+        "Description": "Quartiermeister ist die erste gemeinwohlbilanzierte Biermarke Deutschlands. Das unabhängige Sozialunternehmen aus Berlin setzt sich seit 2010 für eine gerechte Wirtschaft zum Wohle aller ein. Mit jeder verkauften Flasche unterstützt es soziale und kulturelle Projekte, die sich für gesellschaftliche Teilhabe engagieren und zwar genau dort, wo das Bier getrunken wird. Die Vision von Quartiermeister ist eine Wirtschaft, von der nicht nur wenige, sondern alle profitieren. Das Besondere: Bei Quartiermeister entscheiden keine Gründer*innen, Anteileigner*innen oder Beiräte hinter verschlossenen Türen, wer von den unternehmerischen Erlösen profitiert, sondern alle Konsument*innen und Engagierten werden demokratisch an dem Mittelvergabeprozess beteiligt. Dadurch soll insbesondere die soziale Dimension von Nachhaltigkeit gestärkt werden. Die Menschen erfahren Selbstwirksamkeit, Transparenz und Teilhabe und sehen im besten Fall in unmittelbarer Nachbarschaft den Mehrwert ihres eigenen Konsums bzw. können ihn für ihre eigenes soziales Engagement einsetzen.  Mit über 230.000 € hat Quartiermeister bereits Initiativen gefördert, die sich für eine vielfältige und solidarische Nachbarschaft einsetzen, z.B. Selbsthilfewerkstätten, Bürger*inneninitiativen, ehrenamtliche Begegnungszentren oder Urban-Gardeningprojekte. Alle Engagierten können sich auf die niedrigschwellige Projektförderung bewerben. Der offene Quartiermeister e.V. mit über 100 Ehrenamtlichen kuratiert die Bewerbungen und organisiert öffentliche Onlineabstimmungen, in denen entschieden wird, welche Projekte gefördert werden.  Die Vielfalt dieses Engagements würdigt Quartiermeister auch auf seinen Etiketten. Neue Bio-Biersorten zieren die Gesichter verschiedenster real existierender Aktivist*innen mit einer eigenen Engagement-Geschichte. Sie sind Vorbilder für eine diverse, solidarische und offene Gesellschaft. Die Biere werden nach einer eigenen Rezeptur in unabhängigen bzw. mittelständischen Familien- bzw. Genossenschaftsbrauereien (u.a. in der Lausitz) gebraut. Die Idee ist bereits über die Ränder Berlins gewachsen. Mittlerweile werden jährlich über eine Million Flaschen nicht nur in der Berliner Gastronomie bzw. im Einzelhandel verkauft, sondern bspw. auch in Leipzig, Dresden und München.  2021 gründete Quartiermeister eine eigene gemeinnützige Stiftung, um die soziale Mission im Wachstum auf ewig zu schützen. Seitdem ist die Biermarke unverkäuflich und gehört ihrem sozialen Zweck. Für sein Engagement erhielt Quartiermeister 2023 den Deutschen Nachhaltigkeitspreis in der Kategorie „Local Heroes“.",
+        "SDGs": [
+            8,
+            10,
+            11,
+            12,
+            16,
+            17
+        ],
+        "Address": "Schliemannstraße 48, 10437 Berlin",
+        "Latitude": "52,54107",
+        "Longitude": "13,41637"
+    },
+    {
+        "Name": "Urban Gardening",
+        "Website": "visitberlin.de",
+        "Description": "Steglitz-Zehlendorf ist bekannt für seine Grünanlagen und bietet eine Vielzahl von Stadt-, Natur- und Kulturerlebnissen. Im Hinblick auf die Kombination von Nachhaltigkeit, Tourismus und Einbeziehung der lokalen Nachbarschaft bieten „Urban Gardening“-Projekte ungenutztes Potential, um den Bezirk für Touristen und Einheimische noch attraktiver zu machen.  Urban Gardening bezeichnet den Anbau von Pflanzen in städtischen Umgebungen, oft in gemeinschaftlich genutzten Bereichen wie Hinterhöfen, Dächern oder öffentlichen Grünflächen. Die Umsetzung kann dabei verschiedene Formen annehmen und diverse Akteure mit einbeziehen. Urban Gardening Projekte können einen Raum schaffen, der die Vielfalt der Menschen und Kulturen in städtischen Gemeinschaften feiert und zur Förderung von Toleranz, Akzeptanz und Verständnis beiträgt. Zudem kann eine strategische Umsetzung sowohl die lokale Wirtschaft als auch die Lebensqualität der Bewohner nachhaltig verbessern.  Zur Vorbereitung eines solchen Projektes wurde 2023 eine Potenzialstudie in Auftrag gegeben – eine mögliche Realisierung für den Bezirk Steglitz-Zehlendorf ist für das Jahr 2025 geplant. Im Vordergrund sollen dabei unteranderem die globalen Nachhaltigkeitsziele stehen.  Wir möchten die lokale Gemeinschaft bei der Umsetzung aktiv einbeziehen und so den Austausch, die Vielfalt und Inklusion in unserem Bezirk fördern. Die Reduzierung von Abfall, ein schonender Umgang mit Ressourcen sowie die Förderung der lokalen Kultur werden dabei angestrebt.  Durch die Einbeziehung verschiedener Partnerschaften sollen die angestrebten Ziele nicht einfach nur umgesetzt, sondern gelebt werden. Es ist geplant verschiedene Schulen einzubeziehen, dabei haben wir unteranderem an die Peter-Lenné-Schule (OSZ Natur und Umwelt) und die Johann-August-Zeune-Schule für Blinde (eine Förderschule für Schüler, die blind oder sehbehindert sind) gedacht. Zudem bspw. das Café in der Schwartzschen Villa sowie die Verknüpfung von Urban Gardening mit Kunst oder künstlerischen Events.",
+        "SDGs": "",
+        "Address": "Schöneberger Straße 15, 10963 Berlin",
+        "Latitude": "52,501",
+        "Longitude": "13,37444"
     }
 ]
