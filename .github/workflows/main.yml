@@ -3,7 +3,7 @@ name: Convert & Deploy converted sdg project data
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - masterlist.csv
   workflow_dispatch:
