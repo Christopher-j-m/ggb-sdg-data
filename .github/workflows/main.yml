@@ -26,7 +26,7 @@ jobs:
     # Step 3: Run the Convert-Script
     - name: Run Python script
       run: |
-        python scripts/convert_sdg_data.py masterlist.csv output/sdg_data.json
+        python scripts/convert_sdg_data.py masterlist.csv $RUNNER_TEMP/sdg_data.json
 
     # Step 4: Commit and push the new JSON file to the "output" branch
     - name: Commit and push JSON to "output" branch
@@ -36,6 +36,7 @@ jobs:
         
         git checkout -B output
         git rm -rf . || true
-        git add output/sdg_data.json
+        cp $RUNNER_TEMP/sdg_data.json ./sdg_data.json
+        git add sdg_data.json
         git commit -m "Update sdg_data.json"
         git push origin output --force
