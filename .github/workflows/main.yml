@@ -1,0 +1,38 @@
+name: Convert & Deploy converted sdg project data
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - masterlist.csv
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout this repository
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python
+    - name: Use Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Use the desired Python version
+
+    # Step 3: Run the Convert-Script
+    - name: Run Python script
+      run: |
+        python src/convert_sdg_data.py masterlist.csv sdg_data.json
+
+    # Step 4: Commit and push the new JSON file
+    - name: Commit and push JSON
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add sdg_data.json
+        git commit -m "Add/update sdg_data.json"
+        git push
