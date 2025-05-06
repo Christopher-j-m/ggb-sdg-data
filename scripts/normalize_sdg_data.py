@@ -86,10 +86,11 @@ def normalize_lat_lon(csv_data):
             row['longitude'] = row['longitude'].replace(',', '.')
     return csv_data
 
-def rename_and_prepend_website(csv_data):
+def rename_homepage_and_create_website(csv_data):
     """
-    Renames the 'website' column to 'homepage' and prepends 'https://' to its values 
-    if not empty and does not already start with 'https://'.
+    Renames the 'homepage' column to 'domain' without modifying its values and creates a new 'website' column.
+    The 'website' column contains the value of 'domain' with 'https://' prepended
+    if it doesn't already start with 'https://'.
 
     Parameters:
     -----------
@@ -99,16 +100,19 @@ def rename_and_prepend_website(csv_data):
     Returns:
     --------
     list of dict
-        The updated CSV data with the 'website' column renamed to 'homepage' and prepended 'https://'.
+        The updated CSV data with the 'website' column renamed to 'domain' and
+        a new 'homepage' column added with value "https://" + domain.
     """
-
     for row in csv_data:
         if 'website' in row:
-            if row['website'] and not row['website'].startswith('https://'):
-                row['homepage'] = f"https://{row['website']}"
+            # Rename 'website' to 'domain'
+            row['domain'] = row.pop('website')
+
+            # Create 'homepage' column with 'https://' prepended from domain (if necessary)
+            if row['domain'] and not row['domain'].startswith('https://'):
+                row['homepage'] = f"https://{row['domain']}"
             else:
-                row['homepage'] = row['website']
-            del row['website']
+                row['homepage'] = row['domain']
     return csv_data
 
 def read_csv(input_csv_file_path):
@@ -158,7 +162,7 @@ def write_csv(output_csv_file_path, csv_data):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        sys.exit("Usage: python normalize_sdg_data.py <input_csv_file> <output_csv_file_path>")
+        sys.exit("This script assumes the following inputs: <input_csv_file> <output_csv_file_path>")
 
     input_csv_file_path = sys.argv[1]
     final_output_csv_file_path = sys.argv[2]
@@ -168,6 +172,6 @@ if __name__ == "__main__":
     csv_data = lowercase_column_names(csv_data)
     csv_data = add_id_column(csv_data)
     csv_data = normalize_lat_lon(csv_data)
-    csv_data = rename_and_prepend_website(csv_data)
+    csv_data = rename_homepage_and_create_website(csv_data)
 
     write_csv(final_output_csv_file_path, csv_data)
