@@ -51,8 +51,8 @@ def convert_csv_to_json(file_path):
 
             # Convert the SDGs field into an array and append the remaining fields
             for row in reader:
-                if 'SDGs' in row and row['SDGs']:
-                    row['SDGs'] = [int(sdg.strip()) for sdg in row['SDGs'].split(',')]
+                if 'sdgs' in row and row['sdgs']:
+                    row['sdgs'] = [int(sdg.strip()) for sdg in row['sdgs'].split(',')]
                 data.append(row)
 
             # Ensure non-ASCII characters are not escaped
