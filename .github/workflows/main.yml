@@ -54,7 +54,10 @@ jobs:
         git checkout -B output
         git rm -rf . || true
         cp $RUNNER_TEMP/sdg_data.json ./sdg_data.json
-        cp $RUNNER_TEMP/failed_addresses.txt ./failed_addresses.txt
-        git add sdg_data.json failed_addresses.txt
-        git commit -m "Add converted data & failed addresses"
+        if [ -f $RUNNER_TEMP/failed_addresses.txt ]; then
+          cp $RUNNER_TEMP/failed_addresses.txt ./failed_addresses.txt
+          git add failed_addresses.txt
+        fi
+        git add sdg_data.json
+        git commit -m "Add converted data & failed addresses" || echo "No changes to commit"
         git push origin output --force
