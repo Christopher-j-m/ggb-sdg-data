@@ -32,7 +32,7 @@ jobs:
     # Step 4: Run the Geocoding-Script
     - name: Geocode SDG data
       run: |
-        python scripts/address_geocoding.py masterlist.csv masterlist.csv
+        python scripts/address_geocoding.py masterlist.csv masterlist.csv $RUNNER_TEMP/failed_addresses.txt
 
     # Step 5: Run the Geocoding-Script
     - name: Push geocoded CSV to main
@@ -48,15 +48,13 @@ jobs:
       run: |
         python scripts/convert_sdg_data.py masterlist.csv $RUNNER_TEMP/sdg_data.json
 
-    # Step 7: Commit and push the new JSON file to the "output" branch
+    # Step 7: Commit and push the converted JSON & list of failed addresses to the "output" branch
     - name: Push JSON to "output" branch
       run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        
         git checkout -B output
         git rm -rf . || true
         cp $RUNNER_TEMP/sdg_data.json ./sdg_data.json
-        git add sdg_data.json
-        git commit -m "Update sdg_data.json"
+        cp $RUNNER_TEMP/failed_addresses.txt
+        git add sdg_data.json failed_addresses.txt
+        git commit -m "Add converted data & failed addresses"
         git push origin output --force

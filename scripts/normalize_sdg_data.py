@@ -16,7 +16,7 @@ Christopher-Julian Müller
 """
 
 import sys
-from csv_utils import read_csv, write_csv
+from file_utils import read_csv, write_csv
 
 def lowercase_column_names(csv_data):
     """
@@ -200,4 +200,4 @@ if __name__ == "__main__":
         cover_csv_data = read_csv(cover_csv_file_path)
         csv_data = add_cover_image_id(csv_data, cover_csv_data)
 
-    write_csv(final_output_csv_file_path, csv_data)
+    write_csv(csv_data, final_output_csv_file_path)

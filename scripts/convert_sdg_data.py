@@ -11,7 +11,7 @@ Christopher-Julian Müller
 
 import sys
 import json
-from csv_utils import read_csv
+from file_utils import read_csv
 
 
 def convert_csv_to_json(csv_data):

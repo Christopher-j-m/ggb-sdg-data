@@ -11,7 +11,7 @@ Christopher-Julian Müller
 """
 
 import sys
-from csv_utils import read_csv, write_csv
+from file_utils import read_csv, write_csv, write_failed_rows_to_textfile
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
 
@@ -26,30 +26,48 @@ def geocode_addresses(csv_data):
 
     Returns:
     --------
-    list of dict
-        The updated CSV data with 'latitude' and 'longitude' columns added where missing.
+    tuple:
+        - list of dict: The updated CSV data with 'latitude' and 'longitude' columns added where missing.
+        - list of dict: A list of rows that couldn't be geocoded, with the reason and the address field.
     """
 
     geolocator = Nominatim(user_agent="address_geocoding")
-    
-    for row in csv_data:
+    failed_rows = []  # To store rows that couldn't be geocoded
+
+    for index, row in enumerate(csv_data, start=1):
         if ('latitude' not in row or not row['latitude']) and ('longitude' not in row or not row['longitude']):
             if 'street_address' in row and row['street_address']:
                 try:
-                    location = geolocator.geocode(row['street_address'], timeout=10)
+                    location = geolocator.geocode(row['street_address'], timeout=5)
+
+                    # Long and lat found for address
                     if location:
                         row['latitude'] = location.latitude
                         row['longitude'] = location.longitude
+
+                    # Unknown address
                     else:
-                        print(f"Couldn't geocode address in row '{csv_data.index(row)+1}': {row['street_address']}")
+                        failed_rows.append({
+                            "row_index": index,
+                            "reason": "Unknown address(format?)",
+                            "name": row.get("name", "Unknown name"),
+                            "street_address": row['street_address']
+                        })
                         row['latitude'] = None
                         row['longitude'] = None
+
+                # API request timed out
                 except GeocoderTimedOut:
-                    print(f"Geocoding timed out for row '{csv_data.index(row)+1}': {row['street_address']}")
+                    failed_rows.append({
+                        "row_index": index,
+                        "reason": "Timeout",
+                        "name": row.get("name", "Unknown name"),
+                        "street_address": row['street_address']
+                    })
                     row['latitude'] = None
                     row['longitude'] = None
 
-    return csv_data
+    return csv_data, failed_rows
 
 if __name__ == "__main__":
     """
@@ -67,14 +85,18 @@ if __name__ == "__main__":
         If the number of arguments is != 3.
     """
 
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         sys.exit(f"""This script requires the following inputs:
-        <input_csv_file> <output_csv_file_path>
+        <input_csv_file> <output_csv_file_path> <failed_output_csv_file_path>
         Received instead: {len(sys.argv) - 1}""")
 
     input_csv_file_path = sys.argv[1]
     output_csv_file_path = sys.argv[2]
+    failed_rows_file_path = sys.argv[3]
 
     csv_data = read_csv(input_csv_file_path)
-    csv_data = geocode_addresses(csv_data)
-    write_csv(output_csv_file_path, csv_data)
+    csv_data, failed_rows = geocode_addresses(csv_data)
+    
+    write_csv(csv_data, output_csv_file_path)
+    if failed_rows:
+        write_failed_rows_to_textfile(failed_rows, failed_rows_file_path)
