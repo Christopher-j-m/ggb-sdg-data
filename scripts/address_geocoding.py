@@ -48,7 +48,7 @@ def geocode_addresses(csv_data):
                     # Unknown address
                     else:
                         failed_rows.append({
-                            "row_index": index,
+                            "row_index": index+1,
                             "reason": "Unknown address(format?)",
                             "name": row.get("name", "Unknown name"),
                             "street_address": row['street_address']
@@ -59,7 +59,7 @@ def geocode_addresses(csv_data):
                 # API request timed out
                 except GeocoderTimedOut:
                     failed_rows.append({
-                        "row_index": index,
+                        "row_index": index+1,
                         "reason": "Timeout",
                         "name": row.get("name", "Unknown name"),
                         "street_address": row['street_address']
