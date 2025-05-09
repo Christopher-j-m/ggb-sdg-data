@@ -7,15 +7,16 @@ This script normalizes a CSV file containing SDG data by performing the followin
 2. Adds an 'id' column if it doesn't already exist and assigns in ascending order ids (starting from 1).
 3. Normalizes latitude and longitude columns by replacing commas with dots.
 4. Renames the 'website' column to 'homepage' and prepends 'https://' to its values if that isn't the case already.
-5. Writes the normalized data to a new CSV file.
+5. Maps cover_ids from a given CSV file to the rows of the input CSV
+6. Writes the normalized data to a new CSV file.
 
 Author:
 -------
 Christopher-Julian Müller
 """
 
-import csv
 import sys
+from csv_utils import read_csv, write_csv
 
 def lowercase_column_names(csv_data):
     """
@@ -103,6 +104,7 @@ def rename_homepage_and_create_website(csv_data):
         The updated CSV data with the 'website' column renamed to 'domain' and
         a new 'homepage' column added with value "https://" + domain.
     """
+
     for row in csv_data:
         if 'website' in row:
             # Rename 'website' to 'domain'
@@ -153,7 +155,7 @@ def add_cover_image_id(input_csv_data, cover_csv_data):
         The updated input CSV data with the 'cover_image_id' column added to matching rows.
     """
 
-    # Create a lookup table for the ids
+    # Reduce time complexity by creating a lookup table for the cover ids
     cover_lookup = {}
     for row in cover_csv_data:
         if row.get('name'):
@@ -175,51 +177,6 @@ def add_cover_image_id(input_csv_data, cover_csv_data):
 
     return input_csv_data
 
-def read_csv(input_csv_file_path):
-    """
-    Reads a CSV file and returns its data as a list of dictionaries.
-
-    Parameters:
-    -----------
-    input_csv_file_path : str
-        The path to the input CSV file.
-
-    Returns:
-    --------
-    list of dict
-        The CSV data as a list of dictionaries.
-    """
-
-    try:
-        with open(input_csv_file_path, mode='r', newline='', encoding='utf-8') as input_file:
-            reader = csv.DictReader(input_file)
-            return list(reader)
-    except FileNotFoundError:
-        sys.exit(f"Error: The file '{input_csv_file_path}' was not found.")
-    except Exception as e:
-        sys.exit(f"An error occurred: {e}")
-
-def write_csv(output_csv_file_path, csv_data):
-    """
-    Writes the CSV data to a file.
-
-    Parameters:
-    -----------
-    output_csv_file_path : str
-        The path to the output CSV file.
-    csv_data : list of dict
-        The CSV data as a list of dictionaries that should be written to file.
-    """
-    try:
-        if csv_data:
-            fieldnames = csv_data[0].keys()
-            with open(output_csv_file_path, mode='w', newline='', encoding='utf-8') as output_file:
-                writer = csv.DictWriter(output_file, fieldnames=fieldnames)
-                writer.writeheader()
-                writer.writerows(csv_data)
-    except Exception as e:
-        sys.exit(f"An error occurred while writing to the file: {e}")
-
 if __name__ == "__main__":
     if len(sys.argv) > 4:
         sys.exit(f"""
@@ -238,7 +195,6 @@ if __name__ == "__main__":
     csv_data = rename_homepage_and_create_website(csv_data)
     csv_data = rename_address_to_street_address(csv_data)
 
-    # Map cover ids to the rows of the input CSV
     if len(sys.argv) == 4:
         cover_csv_file_path = sys.argv[3]
         cover_csv_data = read_csv(cover_csv_file_path)

@@ -2,25 +2,19 @@
 convert_sdg_data.py
 ===================
 
-This script converts a CSV file with SDG project data with the following fields into a JSON file.
-- Name: The name of the SDG.
-- Website: The URL of the project.
-- Description: Description of the project.
-- SDGs: The Sustainable Development Goals (SDGs) associated with the project, represented as a comma-separated string.
-- Address: The address of the project.
-- Latitude: The latitude of the project location.
-- Longitude: The longitude of the project location.
+This script converts a CSV file into a JSON file with the `SDGs` field converted into an array of integers.
 
 Author:
 -------
 Christopher-Julian Müller
 """
 
-import csv
 import sys
 import json
+from csv_utils import read_csv
 
-def convert_csv_to_json(file_path):
+
+def convert_csv_to_json(csv_data):
     """
     Converts a CSV file to JSON format.
 
@@ -44,29 +38,14 @@ def convert_csv_to_json(file_path):
         If any other error occurs during processing.
     """
     
-    try:
-        with open(file_path, mode='r') as file:
-            reader = csv.DictReader(file)
-            data = []
-
-            # Convert the SDGs field into an array and append the remaining fields
-            for row in reader:
-                if 'sdgs' in row and row['sdgs']:
-                    row['sdgs'] = [int(sdg.strip()) for sdg in row['sdgs'].split(',')]
-                data.append(row)
-
-            # Ensure non-ASCII characters are not escaped
-            return json.dumps(data, indent=4, ensure_ascii=False)
-        
-    except FileNotFoundError:
-        sys.exit(f"Error: The provided file path '{file_path}' was not valid.")
-
-    except Exception as e:
-        sys.exit(f"An error occurred while converting the input CSV to JSON: {e}")
+    for row in csv_data:
+        if 'sdgs' in row and row['sdgs']:
+            row['sdgs'] = [int(sdg.strip()) for sdg in row['sdgs'].split(',')]
+    return json.dumps(csv_data, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
     """
-    Validate the amount of input arguments, processes the input CSV file, and writes the resulting JSON data to
+    Validate the amount of input arguments, converts the input CSV file, and writes the resulting JSON data to
     the specified output file.
 
     Command-line Arguments:
@@ -82,11 +61,17 @@ if __name__ == "__main__":
     """
 
     if len(sys.argv) != 3:
-        sys.exit("This script assumes the following inputs: <input_csv_file> <output_json_file_path>; received instead: " + str(len(sys.argv) - 1))
-    
+        sys.exit("""
+        This script requires the following inputs:
+        <input_csv_file> <output_json_file_path>
+        Received instead: {}
+        """.format(len(sys.argv) - 1))
+
     csv_file_path = sys.argv[1]
     json_file_path = sys.argv[2]
-    json_data = convert_csv_to_json(csv_file_path)
+
+    csv_data = read_csv(csv_file_path)
+    json_data = convert_csv_to_json(csv_data)
 
     if json_data is not None:
         try:
