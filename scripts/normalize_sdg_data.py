@@ -115,6 +115,66 @@ def rename_homepage_and_create_website(csv_data):
                 row['homepage'] = row['domain']
     return csv_data
 
+def rename_address_to_street_address(csv_data):
+    """
+    Renames the 'address' column to 'street_address'.
+
+    Parameters:
+    -----------
+    csv_data : list of dict
+        The CSV data as a list of dictionaries.
+
+    Returns:
+    --------
+    list of dict
+        The updated CSV data with the 'address' column renamed to 'street_address'.
+    """
+
+    for row in csv_data:
+        if 'address' in row:
+            row['street_address'] = row.pop('address')
+    return csv_data
+
+def add_cover_image_id(input_csv_data, cover_csv_data):
+    """
+    Matches rows from the input CSV with rows from the cover CSV based on 'name' (preferably) 
+    or 'domain' and adds a new column 'cover_image_id' to the matching rows.
+
+    Parameters:
+    -----------
+    input_csv_data : list of dict
+        The main CSV data as a list of dictionaries.
+    cover_csv_data : list of dict
+        The cover CSV data as a list of dictionaries.
+
+    Returns:
+    --------
+    list of dict
+        The updated input CSV data with the 'cover_image_id' column added to matching rows.
+    """
+
+    # Create a lookup table for the ids
+    cover_lookup = {}
+    for row in cover_csv_data:
+        if row.get('name'):
+            cover_lookup[row['name'].strip().lower()] = row.get('cover_image_id')
+        if row.get('domain'):
+            cover_lookup[row['domain'].strip().lower()] = row.get('cover_image_id')
+
+    # Add 'cover_image_id' column to matching row in the input CSV
+    for row in input_csv_data:
+        cover_image_id = None
+        if 'name' in row and row['name'].strip().lower() in cover_lookup:
+            cover_image_id = cover_lookup[row['name'].strip().lower()]
+        elif 'domain' in row and row['domain'].strip().lower() in cover_lookup:
+            cover_image_id = cover_lookup[row['domain'].strip().lower()]
+        
+        # Add the respective ID to the new column in the matching row
+        if cover_image_id:
+            row['cover_image_id'] = cover_image_id
+
+    return input_csv_data
+
 def read_csv(input_csv_file_path):
     """
     Reads a CSV file and returns its data as a list of dictionaries.
@@ -161,8 +221,11 @@ def write_csv(output_csv_file_path, csv_data):
         sys.exit(f"An error occurred while writing to the file: {e}")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        sys.exit("This script assumes the following inputs: <input_csv_file> <output_csv_file_path>")
+    if len(sys.argv) > 4:
+        sys.exit(f"""
+        This script requires the following inputs:
+        <input_csv_file> <output_csv_file_path> [optional <cover_csv_file_path>]
+        Received instead: {len(sys.argv) - 1}""")
 
     input_csv_file_path = sys.argv[1]
     final_output_csv_file_path = sys.argv[2]
@@ -173,5 +236,12 @@ if __name__ == "__main__":
     csv_data = add_id_column(csv_data)
     csv_data = normalize_lat_lon(csv_data)
     csv_data = rename_homepage_and_create_website(csv_data)
+    csv_data = rename_address_to_street_address(csv_data)
+
+    # Map cover ids to the rows of the input CSV
+    if len(sys.argv) == 4:
+        cover_csv_file_path = sys.argv[3]
+        cover_csv_data = read_csv(cover_csv_file_path)
+        csv_data = add_cover_image_id(csv_data, cover_csv_data)
 
     write_csv(final_output_csv_file_path, csv_data)
