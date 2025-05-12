@@ -28,17 +28,27 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r scripts/requirements.txt
+
+    # Step 4: Normalize SDG data
+    - name: Normalize SDG data
+      run: |
+        python scripts/normalize_sdg_data.py masterlist.csv masterlist.csv
       
     # Step 4: Run the Geocoding-Script
     - name: Geocode SDG data
       run: |
-        python scripts/address_geocoding.py masterlist.csv masterlist.csv $RUNNER_TEMP/failed_addresses.txt
+        python scripts/address_geocoding.py masterlist.csv masterlist.csv failed_addresses.txt
 
     # Step 5: Run the Geocoding-Script
-    - name: Push geocoded CSV to main
+    - name: Push geocoding results
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+        if [ -f failed_addresses.txt ]; then
+        git add failed_addresses.txt
+        git commit -m "Add failed addresses"
+        fi
         
         git add masterlist.csv
         git diff --cached --exit-code || (git commit -m "Updated geocoded addresses" && git push)
@@ -46,22 +56,11 @@ jobs:
     # Step 6: Run the Convert-Script
     - name: Convert SDG data to JSON
       run: |
-        python scripts/convert_sdg_data.py masterlist.csv $RUNNER_TEMP/sdg_data.json
+        python scripts/convert_sdg_data.py masterlist.csv sdg_data.json
 
     # Step 7: Commit and push the converted JSON & list of failed addresses to the "output" branch
-    - name: Push JSON to "output" branch
+    - name: Push JSON & updated masterlist
       run: |
-        git checkout -B output
-        git rm -rf . || true
-
-        if [ -f $RUNNER_TEMP/failed_addresses.txt ]; then
-        cp $RUNNER_TEMP/failed_addresses.txt ./failed_addresses.txt
-        git add failed_addresses.txt
-        git commit -m "Add failed addresses"
-        fi
-
-        cp $RUNNER_TEMP/sdg_data.json ./sdg_data.json
         git add sdg_data.json
         git commit -m "Add converted JSON data"
-        
-        git push origin output --force
+        git push

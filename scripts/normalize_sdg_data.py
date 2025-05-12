@@ -177,27 +177,62 @@ def add_cover_image_id(input_csv_data, cover_csv_data):
 
     return input_csv_data
 
+# if __name__ == "__main__":
+    # if len(sys.argv) > 4:
+    #     sys.exit(f"""
+    #     This script requires the following inputs:
+    #     <input_csv_file> <output_csv_file_path> [optional <cover_csv_file_path>]
+    #     Received instead: {len(sys.argv) - 1}""")
+
+    # input_csv_file_path = sys.argv[1]
+    # final_output_csv_file_path = sys.argv[2]
+
+    # csv_data = read_csv(input_csv_file_path)
+
+    # csv_data = lowercase_column_names(csv_data)
+    # csv_data = add_id_column(csv_data)
+    # csv_data = normalize_lat_lon(csv_data)
+    # csv_data = rename_homepage_and_create_website(csv_data)
+    # csv_data = rename_address_to_street_address(csv_data)
+
+    # if len(sys.argv) == 4:
+    #     cover_csv_file_path = sys.argv[3]
+    #     cover_csv_data = read_csv(cover_csv_file_path)
+    #     csv_data = add_cover_image_id(csv_data, cover_csv_data)
+
+    # write_csv(csv_data, final_output_csv_file_path)
+
 if __name__ == "__main__":
-    if len(sys.argv) > 4:
+    if len(sys.argv) < 3 or len(sys.argv) > 5:
         sys.exit(f"""
         This script requires the following inputs:
-        <input_csv_file> <output_csv_file_path> [optional <cover_csv_file_path>]
+        <input_csv_file> <output_csv_file_path> [optional <mode: all|minimal>] [optional <cover_csv_file_path>]
         Received instead: {len(sys.argv) - 1}""")
 
     input_csv_file_path = sys.argv[1]
     final_output_csv_file_path = sys.argv[2]
+    mode = sys.argv[3] if len(sys.argv) >= 4 else "all"
+    cover_csv_file_path = sys.argv[4] if len(sys.argv) == 5 else None
 
+    # Validate mode
+    if mode not in ["all", "minimal"]:
+        sys.exit(f"Error: Invalid mode '{mode}'. Mode must be 'all' or 'minimal'.")
+
+    # Read the input CSV
     csv_data = read_csv(input_csv_file_path)
 
+    # Minimal mode (used within Pipeline)
     csv_data = lowercase_column_names(csv_data)
     csv_data = add_id_column(csv_data)
     csv_data = normalize_lat_lon(csv_data)
-    csv_data = rename_homepage_and_create_website(csv_data)
-    csv_data = rename_address_to_street_address(csv_data)
 
-    if len(sys.argv) == 4:
-        cover_csv_file_path = sys.argv[3]
-        cover_csv_data = read_csv(cover_csv_file_path)
-        csv_data = add_cover_image_id(csv_data, cover_csv_data)
+    if mode == "all":
+        csv_data = rename_homepage_and_create_website(csv_data)
+        csv_data = rename_address_to_street_address(csv_data)
 
+        if cover_csv_file_path:
+            cover_csv_data = read_csv(cover_csv_file_path)
+            csv_data = add_cover_image_id(csv_data, cover_csv_data)
+
+    # Write the output CSV
     write_csv(csv_data, final_output_csv_file_path)
