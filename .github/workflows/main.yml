@@ -52,7 +52,7 @@ jobs:
       run: |
         python scripts/convert_sdg_data.py masterlist.csv sdg_data.json
 
-    - name: Push JSON & updated masterlist
+    - name: Push JSON
       run: |
         git add sdg_data.json
         git commit -m "Add converted JSON data"
