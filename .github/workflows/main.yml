@@ -29,6 +29,10 @@ jobs:
     - name: Normalize SDG data
       run: |
         python scripts/normalize_sdg_data.py masterlist.csv masterlist.csv
+      
+    - name: Geocode SDG data
+      run: |
+        python scripts/address_geocoding.py masterlist.csv masterlist.csv failed_addresses.txt
 
     - name: Push geocoding results
       run: |
@@ -39,11 +43,8 @@ jobs:
         git add failed_addresses.txt
         git diff --cached --exit-code || (git commit -m "Add failed addresses")
         fi
-
-        git status
+        
         git add masterlist.csv
-        git status
-        git diff --cached
         git diff --cached --exit-code || (git commit -m "Updated geocoded addresses")
         git push
 
