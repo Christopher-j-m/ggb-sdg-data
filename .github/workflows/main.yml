@@ -13,33 +13,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout this repository
     - name: Check out repository
       uses: actions/checkout@v3
 
-    # Step 2: Set up Python
     - name: Use Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
-    # Step 3: Install dependencies
     - name: Restore requirements.txt
       run: |
         python -m pip install --upgrade pip
         pip install -r scripts/requirements.txt
 
-    # Step 4: Normalize SDG data
     - name: Normalize SDG data
       run: |
         python scripts/normalize_sdg_data.py masterlist.csv masterlist.csv
       
-    # Step 4: Run the Geocoding-Script
     - name: Geocode SDG data
       run: |
         python scripts/address_geocoding.py masterlist.csv masterlist.csv failed_addresses.txt
 
-    # Step 5: Run the Geocoding-Script
     - name: Push geocoding results
       run: |
         git config --global user.name "github-actions[bot]"
@@ -51,14 +45,13 @@ jobs:
         fi
         
         git add masterlist.csv
-        git diff --cached --exit-code || (git commit -m "Updated geocoded addresses" && git push)
+        git diff --cached --exit-code || (git commit -m "Updated geocoded addresses")
+        git push
 
-    # Step 6: Run the Convert-Script
     - name: Convert SDG data to JSON
       run: |
         python scripts/convert_sdg_data.py masterlist.csv sdg_data.json
 
-    # Step 7: Commit and push the converted JSON & list of failed addresses to the "output" branch
     - name: Push JSON & updated masterlist
       run: |
         git add sdg_data.json
