@@ -38,10 +38,16 @@ def convert_csv_to_json(csv_data):
         If any other error occurs during processing.
     """
     
+    non_empty = []
     for row in csv_data:
+        cleaned_row = {key: value for key, value in row.items() if key != ''}
+        non_empty.append(cleaned_row)
+
+    for row in non_empty:
         if 'sdgs' in row and row['sdgs']:
             row['sdgs'] = [int(sdg.strip()) for sdg in row['sdgs'].split(',')]
-    return json.dumps(csv_data, indent=4, ensure_ascii=False)
+
+    return json.dumps(non_empty, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
     """

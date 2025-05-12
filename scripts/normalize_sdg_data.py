@@ -106,15 +106,13 @@ def rename_homepage_and_create_website(csv_data):
     """
 
     for row in csv_data:
-        if 'website' in row:
-            # Rename 'website' to 'domain'
-            row['domain'] = row.pop('website')
-
-            # Create 'homepage' column with 'https://' prepended from domain (if necessary)
-            if row['domain'] and not row['domain'].startswith('https://'):
-                row['homepage'] = f"https://{row['domain']}"
-            else:
-                row['homepage'] = row['domain']
+        if 'domain' in row:
+            if 'homepage' not in row:
+                # Create 'homepage' column with 'https://' prepended from domain (if necessary)
+                if row['domain'] and not row['domain'].startswith('https://'):
+                    row['homepage'] = f"https://{row['domain']}"
+                else:
+                    row['homepage'] = row['domain']
     return csv_data
 
 def rename_address_to_street_address(csv_data):
@@ -177,31 +175,6 @@ def add_cover_image_id(input_csv_data, cover_csv_data):
 
     return input_csv_data
 
-# if __name__ == "__main__":
-    # if len(sys.argv) > 4:
-    #     sys.exit(f"""
-    #     This script requires the following inputs:
-    #     <input_csv_file> <output_csv_file_path> [optional <cover_csv_file_path>]
-    #     Received instead: {len(sys.argv) - 1}""")
-
-    # input_csv_file_path = sys.argv[1]
-    # final_output_csv_file_path = sys.argv[2]
-
-    # csv_data = read_csv(input_csv_file_path)
-
-    # csv_data = lowercase_column_names(csv_data)
-    # csv_data = add_id_column(csv_data)
-    # csv_data = normalize_lat_lon(csv_data)
-    # csv_data = rename_homepage_and_create_website(csv_data)
-    # csv_data = rename_address_to_street_address(csv_data)
-
-    # if len(sys.argv) == 4:
-    #     cover_csv_file_path = sys.argv[3]
-    #     cover_csv_data = read_csv(cover_csv_file_path)
-    #     csv_data = add_cover_image_id(csv_data, cover_csv_data)
-
-    # write_csv(csv_data, final_output_csv_file_path)
-
 if __name__ == "__main__":
     if len(sys.argv) < 3 or len(sys.argv) > 5:
         sys.exit(f"""
@@ -225,9 +198,9 @@ if __name__ == "__main__":
     csv_data = lowercase_column_names(csv_data)
     csv_data = add_id_column(csv_data)
     csv_data = normalize_lat_lon(csv_data)
+    csv_data = rename_homepage_and_create_website(csv_data)
 
     if mode == "all":
-        csv_data = rename_homepage_and_create_website(csv_data)
         csv_data = rename_address_to_street_address(csv_data)
 
         if cover_csv_file_path:

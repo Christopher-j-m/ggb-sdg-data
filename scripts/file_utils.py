@@ -17,8 +17,10 @@ def read_csv(input_csv_file_path):
     """
 
     try:
-        with open(input_csv_file_path, mode='r', newline='', encoding='utf-8') as input_file:
-            reader = csv.DictReader(input_file)
+        with open(input_csv_file_path, mode='r', newline='', encoding='utf-8-sig') as input_file:
+            sniffer = csv.Sniffer().sniff(input_file.read(), delimiters=",;")
+            input_file.seek(0)
+            reader = csv.DictReader(input_file, delimiter=sniffer.delimiter)
             return list(reader)
     except FileNotFoundError:
         sys.exit(f"Error: The file '{input_csv_file_path}' was not found.")
