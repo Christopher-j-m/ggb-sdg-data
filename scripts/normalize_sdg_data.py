@@ -18,6 +18,23 @@ Christopher-Julian Müller
 import sys
 from file_utils import read_csv, write_csv
 
+def remove_empty_rows(csv_data):
+    """
+    Removes empty rows from the CSV data.
+
+    Parameters:
+    -----------
+    csv_data : list of dict
+        The CSV data as a list of dictionaries.
+
+    Returns:
+    --------
+    list of dict
+        The updated CSV data with empty rows removed.
+    """
+
+    return [row for row in csv_data if any(value.strip() for value in row.values())]
+
 def lowercase_column_names(csv_data):
     """
     Converts all column names in the CSV data to lowercase.
@@ -195,6 +212,7 @@ if __name__ == "__main__":
     csv_data = read_csv(input_csv_file_path)
 
     # Minimal mode (used within Pipeline)
+    csv_data = remove_empty_rows(csv_data)
     csv_data = lowercase_column_names(csv_data)
     csv_data = add_id_column(csv_data)
     csv_data = normalize_lat_lon(csv_data)
