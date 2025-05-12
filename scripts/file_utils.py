@@ -49,6 +49,23 @@ def write_csv(csv_data, output_csv_file_path):
     except Exception as e:
         sys.exit(f"An error occurred while writing to the file: {e}")
 
+def write_text_to_file(text, output_text_file_path):
+    """
+    Writes the given text to a text file.
+
+    Parameters:
+    -----------
+    text : str
+        The text to write to the file.
+    output_text_file_path : str
+        The path to the output text file.
+    """
+    try:
+        with open(output_text_file_path, mode='w', encoding='utf-8') as text_file:
+            text_file.write(text)
+    except Exception as e:
+        sys.exit(f"An error occurred while writing to the text file: {e}")
+
 def write_failed_rows_to_textfile(txt_data, output_text_file_path):
     """
     Writes the failed rows during the geocoding to a text file in the format:

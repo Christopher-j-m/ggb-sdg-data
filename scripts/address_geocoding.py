@@ -11,7 +11,7 @@ Christopher-Julian Müller
 """
 
 import sys
-from file_utils import read_csv, write_csv, write_failed_rows_to_textfile
+from file_utils import read_csv, write_csv, write_failed_rows_to_textfile, write_text_to_file
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
 
@@ -100,3 +100,5 @@ if __name__ == "__main__":
     write_csv(csv_data, output_csv_file_path)
     if failed_rows:
         write_failed_rows_to_textfile(failed_rows, failed_rows_file_path)
+    else:
+        write_text_to_file("Keine Probleme :)", failed_rows_file_path)
