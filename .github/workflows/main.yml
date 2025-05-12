@@ -37,7 +37,7 @@ jobs:
 
         if [ -f failed_addresses.txt ]; then
         git add failed_addresses.txt
-        git commit -m "Add failed addresses"
+        git diff --cached --exit-code || (git commit -m "Add failed addresses")
         fi
 
         git status
