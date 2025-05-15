@@ -59,7 +59,7 @@ def lowercase_column_names(csv_data):
 
 def add_id_column(csv_data):
     """
-    Adds an 'id' column to the CSV data if it doesn't already exist.
+    Adds or replaces an 'id' column in the CSV data.
     Assigns each row an ID starting from 1 (ascending).
 
     Parameters:
@@ -70,17 +70,14 @@ def add_id_column(csv_data):
     Returns:
     --------
     list of dict
-        The updated CSV data with the 'id' column added.
+        The updated CSV data with the 'id' column replaced or added.
     """
 
-    fieldnames = csv_data[0].keys() if csv_data else []
-    if 'id' not in fieldnames:
-        updated_data = []
-        for idx, row in enumerate(csv_data, start=1):
-            row['id'] = idx
-            updated_data.append(row)
-        return updated_data
-    return csv_data
+    updated_data = []
+    for idx, row in enumerate(csv_data, start=1):
+        row['id'] = idx
+        updated_data.append(row)
+    return updated_data
 
 def normalize_lat_lon(csv_data):
     """
