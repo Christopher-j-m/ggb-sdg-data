@@ -1,10 +1,3 @@
 [Row 22] Unknown address(format?): WaterKiosk: Solare Wasserentsalzung für nachhaltige Entwicklung - Schichauweg 52 (Hall C1.1), 12307 Berlin
-[Row 58] Unknown address(format?): Klimaneutrale Social-Media-Kampagnen - Hönowerstraße 35 c/o InnoTechHub - HTW-Berlin, 10318 Berlin
-[Row 70] Unknown address(format?): Plastikneutraler Fahrradhelm mit Ozeanplastik-Kompensation - VolkmarStraße 1-7
-c/o Soulbottles, 12099 Berlin
-[Row 121] Unknown address(format?): Madaster: Digitaler Materialpass für eine zirkuläre Bauindustrie - Bundesallee 39 - 40a, 10717 Berlin
-[Row 129] Unknown address(format?): FNG-Siegel: Qualitätsstandard für nachhaltige Geldanlagen - MotzStraße 3 SF, 10777 Berlin
-[Row 183] Unknown address(format?): Acker – Mehr Wertschätzung für Natur und Lebensmittel - Malzfabrik, Bessemerstraße 2-14, 12103 Berlin
-[Row 185] Unknown address(format?): .GUT Am Flughafen 1 - Gebäude H / ZKSI Flughafen Tegel 1, 13405 Berlin
-[Row 241] Timeout: M.ICC – MOBILITY HUB BERLIN - Invalidenstraße 5, 10115 Berlin
-[Row 308] Unknown address(format?): SpreeVision – Osthafen - Osthafenbecken, 10245 Berlin
+[Row 380] Unknown address(format?): SV-Berater*innen-Projekt - Gneisenauerstraße 16, 10961 Berlin
+[Row 414] Unknown address(format?): JACK Bildungsstätte für Migrantinnen und Flüchtlinge - Ansenstraße 4, 12047 Berlin
