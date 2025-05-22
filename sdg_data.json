@@ -4240,8 +4240,8 @@
         ],
         "cover_image_id": "",
         "street_address": "Kaskelstraße 36, 10317 Berlin",
-        "latitude": "52.5042704",
-        "longitude": "13.4794443",
+        "latitude": "52.5051349",
+        "longitude": "13.4758954",
         "id": "275",
         "homepage": ""
     },
@@ -5868,9 +5868,9 @@
             4
         ],
         "cover_image_id": "",
-        "street_address": "Gneisenauerstraße 16, 10961 Berlin",
-        "latitude": "",
-        "longitude": "",
+        "street_address": "Gneisenaustraße 16, 10961 Berlin",
+        "latitude": "52.4916446",
+        "longitude": "13.3923484",
         "id": "379",
         "homepage": "sv-bildungswerk.de"
     },
@@ -6350,21 +6350,6 @@
         "homepage": "www.ipsocontext.org"
     },
     {
-        "name": "JACK Bildungsstätte für Migrantinnen und Flüchtlinge",
-        "description": "Zahlreiche geflüchtete Frauen kommen nach Deutschland - voll mit Potenzialen, Fertigkeiten und Energie! Um diese auch sinnstiftend einbringen zu können und als Existenzgrundlage zu nutzen, brauchen viele Hilfe: Ihnen widmet sich die Bildungsstätte JACK mit passgenauen Angeboten. Die Bildungsstätte JACK ist ein Ort für geflüchtete und besonders schutzbedürftige Frauen, die wegen ihres Aufenthaltsstatus oder fehlenden Geldes bei anderen Bildungsangeboten außen vor bleiben. Bei JACK können sie ihre Sprachkenntnisse erweitern. Sie lernen lesen oder verbessern ihr Deutsch soweit, dass sie einen Job aufnehmen könnten. Haben sie den Kurs erfolgreich abgeschlossen, erhalten die Frauen offizielle Zertifikate der VHS Berlin-Neukölln. Neben dem Fokus auf Spracherwerb, bietet JACK auch Computerkurse, Kunst- und Kulturkurse sowie persönlichkeitsstärkende offene Angebote an. Darunter fallen u.a. Kurse zu Gesundheitsthemen, Selbstverteidigung oder Gärtnern. Die Kursstruktur berücksichtigt die Bedürfnisse der oftmals alleinerziehenden Frauen: Reine Frauenklassen bieten jenen einen Schutzraum, die sexualisierte oder körperliche Gewalt durch Männer erfahren mussten. Außerdem können durch die kurzen Unterrichtszeiten auch Frauen teilnehmen, die ihre Kinder während des Kurses betreuen lassen müssen. Das Angebot von JACK sorgt somit in mehrfacher Weise dafür, dass Frauen trotz schwieriger persönlicher Situation wirklich in Deutschland ankommen können. Durch den Fokus auf das Deutschlernen schafft JACK die wichtige Basis, um Kontakt im Alltag und alle weiteren Schritte zu bewerkstelligen. Außerdem werden Räume geschaffen, in denen die Frauen Kontakte außerhalb ihrer Familien knüpfen und Hobbies nachgehen können. Die Fortschritte, die die Frauen bei JACK in diesem fast schon familiären Rahmen machen, sind beeindruckend: Bei den meisten Frauen zeigt sich, das sie selbstständiger werden und ihr Leben in Deutschland gestalten wollen. Sie kommen auch im Alltag an – in kleinen, aber bedeutenden Schritten: Frauen vereinbaren selbst Arzttermine, melden ihre Kinder in der KiTa an oder schließen einen Mietvertrag ab. Auch das wachsende Netzwerk mit ergänzenden Angeboten in der Nachbarschaft zeigt, dass JACK sich längt etabliert hat. Tatsächlich haben Kooperationen bei JACK eine wichtige Bedeutung, da man sich hier sehr bewusst darüber ist, wo die eigenen Grenzen des Wirkens liegen. JACK versteht sich bspw. nicht als psychologisches Beratungsangebot. Sollten hier Bedarfe bei den Frauen erkannt werden, zahlt sich aus, dass JACK im Kontakt mit einer Beratungsstelle vor Ort steht, wo besonders Frauen mit Traumata Unterstützung erhalten.",
-        "sdgs": [
-            4,
-            5,
-            10
-        ],
-        "cover_image_id": "",
-        "street_address": "Ansenstraße 4, 12047 Berlin",
-        "latitude": "",
-        "longitude": "",
-        "id": "413",
-        "homepage": "www.jack-berlin.org"
-    },
-    {
         "name": "ReStart & Empower",
         "description": "Mindestens die Hälfte aller Geflüchteten in Deutschland ist psychisch krank. Häufig leiden sie unter einer Posttraumatischen Belastungsstörung (PTBS) oder einer Depression. Doch nicht einmal zehn Prozent der Erkrankten sind in psychotherapeutischer Behandlung. Die Folge: unbehandelte psychische Krankheiten können chronisch werden; Erinnerungen an das Erlebte bleiben, und werden so stark erlebt als wären sie real. Am „normalen” Leben teilzunehmen scheint fast unmöglich. Der Caritasverband für das Erzbistum Berlin e.V. möchte diese Negativspirale stoppen und schafft mit ReStart & Empower ein niedrigschwelliges Angebot für Geflüchtete mit psychischen Problemen. Die SKala Förderung ermöglicht eine Erstberatung, die eine erste Linderung der psychischen Belastung für Betroffene und deren Angehörige verspricht. Falls nötig, können sie in weiterführende Therapieangebote vermittelt werden. Während der Beratung ist ein/e DolmetscherIn anwesend. In den Einzel-und Gruppenangeboten kann bis zu 1.180 Geflüchteten und ihren Angehörigen geholfen werden, Bewältigungsstrategien für den Alltag zu erlernen und die Teilhabe am sozialen Leben zu ermöglichen. Mit der SKala-Förderung werden auch Fortbildungen für Caritas-Mitarbeitende umgesetzt, damit diese psychische Erkrankungen wie beispielsweise PTBS besser erkennen und dementsprechend handeln können.",
         "sdgs": [
@@ -6374,7 +6359,7 @@
         "street_address": "Residenzstraße 90, 13409 Berlin",
         "latitude": "52.5598739",
         "longitude": "13.3706295",
-        "id": "414",
+        "id": "413",
         "homepage": "caritas-berlin.de"
     },
     {
@@ -6389,7 +6374,7 @@
         "street_address": "Am Sudhaus 2, 12053 Berlin",
         "latitude": "52.4789772",
         "longitude": "13.43006",
-        "id": "415",
+        "id": "414",
         "homepage": "www.aerztederwelt.org"
     },
     {
@@ -6405,7 +6390,7 @@
         "street_address": "Reinhardtstraße 13, 10117 Berlin",
         "latitude": "52.5233761",
         "longitude": "13.3857971",
-        "id": "416",
+        "id": "415",
         "homepage": "www.caritas-international.de"
     },
     {
@@ -6419,7 +6404,7 @@
         "street_address": "Wassertorstraße 48, 10969 Berlin",
         "latitude": "52.5004604",
         "longitude": "13.405598",
-        "id": "417",
+        "id": "416",
         "homepage": "www.wassertor.org"
     },
     {
@@ -6433,7 +6418,7 @@
         "street_address": "Geisbergstraße 28, 10777 Berlin",
         "latitude": "52.4975611",
         "longitude": "13.3381861",
-        "id": "418",
+        "id": "417",
         "homepage": "ipsocontext.org/de"
     },
     {
@@ -6447,7 +6432,7 @@
         "street_address": "Fehmarner Straße 12, 13353 Berlin",
         "latitude": "52.5396114",
         "longitude": "13.3500528",
-        "id": "419",
+        "id": "418",
         "homepage": "www.kein-abseits.de"
     },
     {
@@ -6460,7 +6445,7 @@
         "street_address": "Singerstraße 109, 10179 Berlin",
         "latitude": "52.5165993",
         "longitude": "13.4254157",
-        "id": "420",
+        "id": "419",
         "homepage": "www.jugendhackt.org"
     }
 ]
